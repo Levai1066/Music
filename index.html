@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoodBoardify</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>MoodBoardify</h1>
+  <div class="mood-buttons">
+    <button onclick="changeMood('happy')">😊 Happy</button>
+    <button onclick="changeMood('sad')">😢 Sad</button>
+    <button onclick="changeMood('chill')">😎 Chill</button>
+    <button onclick="changeMood('romantic')">❤️ Romantic</button>
+    <button onclick="changeMood('angry')">😠 Angry</button>
+  </div>
+
+  <iframe id="playlist" src="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+  <script>
+    const moodThemes = {
+      happy: {
+        bgColor: '#fff9c4',
+        textColor: '#f57f17',
+        playlist: 'https://open.spotify.com/embed/playlist/37i9dQZF1DXdPec7aLTmlC'
+      },
+      sad: {
+        bgColor: '#90a4ae',
+        textColor: '#263238',
+        playlist: 'https://open.spotify.com/embed/playlist/37i9dQZF1DWVV27DiNWxkR'
+      },
+      chill: {
+        bgColor: '#b2dfdb',
+        textColor: '#004d40',
+        playlist: 'https://open.spotify.com/embed/playlist/37i9dQZF1DX889U0CL85jj'
+      },
+      romantic: {
+        bgColor: '#fce4ec',
+        textColor: '#ad1457',
+        playlist: 'https://open.spotify.com/embed/playlist/37i9dQZF1DWXbttAJcbphz'
+      },
+      angry: {
+        bgColor: '#ef9a9a',
+        textColor: '#b71c1c',
+        playlist: 'https://open.spotify.com/embed/playlist/37i9dQZF1DWZ4Z3f3Ewl16'
+      }
+    };
+
+    function changeMood(mood) {
+      document.documentElement.style.setProperty('--bg-color', moodThemes[mood].bgColor);
+      document.documentElement.style.setProperty('--text-color', moodThemes[mood].textColor);
+      document.getElementById('playlist').src = moodThemes[mood].playlist;
+      localStorage.setItem('lastMood', mood);
+    }
+
+    window.onload = () => {
+      const lastMood = localStorage.getItem('lastMood') || 'happy';
+      changeMood(lastMood);
+    }
+  </script>
+</body>
+</html>
